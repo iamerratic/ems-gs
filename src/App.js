@@ -5,6 +5,8 @@ import HomeScreen from './screen/Home.screen';
 import SigninScreen from './screen/Signin.screen';
 import SignupScreen from './screen/Signup.screen';
 import Header from './components/Header.component';
+import DashboardScreen from './screen/Dashboard.screen'
+import withAuth from './hoc/withAuth';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <Route exact path="/" component={HomeScreen} />
       <Route path="/signup" component={SignupScreen} />
       <Route path="/signin" component={SigninScreen} />
+      <Route path="/dashboard" component={withAuth(DashboardScreen)} />
     </BrowserRouter>
   );
 }
