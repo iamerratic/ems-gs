@@ -1,7 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Form from '../render-props/Form';
 import Card from '../ui/Card';
+import { signupAsync } from '../store/actions/user.action';
+
+
 
 var input_metadata = [
     { name: 'name', type: 'text', label: 'Enter Full Name' },
@@ -10,11 +14,10 @@ var input_metadata = [
     { name: 'password', type: 'password', label: 'Enter Password' }
 ];
 
-function SignupScreen() {
-
+function SignupScreen({ dispatch }) {
 
     function handleSubmit(state) {
-        console.log(state);
+        dispatch(signupAsync(state));
     }
 
     return (
@@ -31,7 +34,7 @@ function SignupScreen() {
                                     return (
                                         <div className="row" key={input.name}>
                                             <div className="input-field col s8">
-                                                <input id={input.name} type={input.type} className="validate" onChange={change} />
+                                                <input id={input.name} name={input.name} type={input.type} className="validate" onChange={change} />
                                                 <label htmlFor={input.name}>{input.label}</label>
                                             </div>
                                         </div>
@@ -48,4 +51,4 @@ function SignupScreen() {
 }
 
 
-export default SignupScreen;
+export default connect()(SignupScreen);

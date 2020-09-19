@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import SignInLinks from './SignInLinks';
 import SignOutLinks from './SignOutLinks';
@@ -19,4 +20,11 @@ function Header({ currentUser }) {
 }
 
 
-export default Header;
+var mapStateToProps = function ({ user: { currentUser } }) {
+
+    return {
+        currentUser: currentUser
+    };
+}
+
+export default connect(mapStateToProps)(Header);

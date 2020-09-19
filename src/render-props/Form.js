@@ -9,9 +9,9 @@ class Form extends Component {
         this.state = this.props.input_metadata.reduce(function (acc, val) {
             return { ...acc, [val.name]: '' };
         }, {});
-
         this.handleChange = this.handleChange.bind(this);
     }
+
 
     handleChange(event) {
         this.setState({

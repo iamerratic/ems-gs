@@ -1,18 +1,27 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { signInWithGoogleAsync } from '../store/actions/user.action';
 
+function SignOutLinks({ dispatch, history }) {
 
-function SignOutLinks() {
+    function redirectToDashboard() {
+        history.push('/dashboard');
+    }
+
+    function logInWithGoogle() {
+        dispatch(signInWithGoogleAsync(redirectToDashboard));
+    }
 
     return (
         <React.Fragment>
             <li><Link to="/signin">SignIn</Link></li>
             <li><Link to="/signup">SignUp</Link></li>
-            <li><a href="collapsible.html" className="btn btn-primary">Login With Google</a></li>
+            <li><button onClick={logInWithGoogle} className="btn btn-primary">Login With Google</button></li>
         </React.Fragment>
     );
 }
 
 
-export default SignOutLinks;
+export default connect()(withRouter(SignOutLinks));
