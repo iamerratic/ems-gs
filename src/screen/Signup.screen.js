@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import Form from '../render-props/Form';
 import Card from '../ui/Card';
-import { signupAsync } from '../store/actions/user.action';
-
+import { signupAsync, initRequest } from '../store/actions/user.action';
+import Loader from '../ui/Loader';
 
 
 var input_metadata = [
@@ -14,9 +14,11 @@ var input_metadata = [
     { name: 'password', type: 'password', label: 'Enter Password' }
 ];
 
-function SignupScreen({ dispatch }) {
+function SignupScreen({ dispatch, isLoading }) {
+    console.log(isLoading);
 
     function handleSubmit(state) {
+        dispatch(initRequest());
         dispatch(signupAsync(state));
     }
 
@@ -25,6 +27,7 @@ function SignupScreen({ dispatch }) {
             {function (state, change) {
                 return (
                     <section className="container" style={{ marginTop: '5rem' }}>
+                        {isLoading && <Loader />}
                         <Card className="row">
                             <form className="col s12" onSubmit={function (event) {
                                 event.preventDefault();
@@ -51,4 +54,9 @@ function SignupScreen({ dispatch }) {
 }
 
 
-export default connect()(SignupScreen);
+var mapStateToProps = ({ user: { isLoading } }) => ({
+    isLoading: isLoading
+});
+
+
+export default connect(mapStateToProps)(SignupScreen);

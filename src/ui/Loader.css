@@ -1,10 +1,12 @@
 .Loader_wrapper {
-    position: absolute;
+    position: fixed;
     width: 100vw;
+    top: 0;
+    left: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
-    z-index: 100;
+    z-index: 1000;
 }

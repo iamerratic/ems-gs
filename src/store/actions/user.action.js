@@ -1,10 +1,24 @@
 import { auth, db, provider } from '../../config/firebase.config';
 
-export function signup(user) {
+export function signupSuccess(user) {
 
     return {
-        type: 'SIGNUP',
+        type: 'SIGNUP_SUCCESS',
         payload: user
+    };
+}
+
+export function signupFailure(err) {
+
+    return {
+        type: 'SINGUP_FAILURE',
+        payload: err
+    };
+}
+
+export function initRequest() {
+    return {
+        type: 'START_REQUEST'
     };
 }
 
@@ -12,16 +26,22 @@ export function signup(user) {
 export function signupAsync({ email, password, name, mobile }) {
 
     return function (dispatch) {
-        auth.createUserWithEmailAndPassword(email, password).then(function (userCred) {
-            var uid = userCred.user.uid;
-            db.collection('users').doc(uid).set({
-                name,
-                mobile
-            })
-                .then(function () {
-                    dispatch(signup({ name, mobile, id: uid }));
+        var uid;
+        auth.createUserWithEmailAndPassword(email, password)
+            .then(function (userCred) {
+                uid = userCred.user.uid;
+                return db.collection('users').doc(uid).set({
+                    name,
+                    mobile,
+                    isEmp: true
                 });
-        });
+            })
+            .then(function () {
+                dispatch(signupSuccess({ name, mobile, id: uid }));
+            })
+            .catch(function (err) {
+                dispatch(signupFailure(err));
+            });
     }
 }
 

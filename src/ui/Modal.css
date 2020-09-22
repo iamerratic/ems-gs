@@ -1,0 +1,45 @@
+.Modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+}
+
+.Modal_Body {
+    width: 70%;
+    min-height: 300px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.Modal_Divider {
+    border: 1px solid red;
+    margin: 20px 0px;
+}
+
+.Modal_Content {
+    flex: 0.7;
+}
+
+.Modal_Footer {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.Modal_Main_Content {
+    padding: 20px;
+}
+
+.Modal_Footer_Actions {
+    margin-top: 20px;
+}
